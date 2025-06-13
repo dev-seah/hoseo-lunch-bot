@@ -1,70 +1,27 @@
-# 🥗 hoseo-lunch-bot
+# hoseo-lunch-bot
 
-> 월~금 오전 11:30에 @hoseofood 인스타그램 계정의 최신 게시물을 자동 캡쳐하고 Supabase에 업로드하는 봇입니다.
+📸 인스타그램 계정(@hoseofood)의 최신 게시물을 캡처하고 Supabase에 업로드하는 자동 봇입니다.
 
----
+## 작동 방식
 
-## ✅ 기능 요약
+- 매주 월~금 오전 11:30
+- `@hoseofood` 인스타그램 계정 접속 → 첫 번째 게시물 클릭 → 전체 화면 캡처
+- Supabase Storage에 업로드
 
-- `@hoseofood` 계정의 **최신 게시물 캡쳐**
-- Supabase Storage에 이미지 자동 업로드
-- 파일명에 날짜 및 시간(`예: lunch_250613_1130.png`) 포함
-- 매주 **평일 오전 11:30 자동 실행** (Railway cron)
+## 구성 파일
 
----
+| 파일 | 설명 |
+|------|------|
+| `main.py` | 인스타그램 캡처 + Supabase 업로드 |
+| `requirements.txt` | 필요한 Python 라이브러리 목록 |
+| `.github/workflows/lunch.yml` | GitHub Actions 자동 실행 설정 |
+| `README.md` | 이 리포지토리 설명서 |
 
-## 🚀 사용 방법
+## GitHub Secrets 설정
 
-### 1. 환경변수 설정 (`.env`)
+Settings → Secrets → Actions 에 아래 키들을 추가하세요:
 
-```env
-SUPABASE_URL=YOUR_SUPABASE_URL
-SUPABASE_KEY=YOUR_SUPABASE_ANON_KEY
-SUPABASE_BUCKET=YOUR_BUCKET_NAME
-```
+- `SUPABASE_URL`
+- `SUPABASE_KEY`
+- `SUPABASE_BUCKET` (예: captures)
 
-### 2. 필요 패키지 설치
-
-```bash
-pip install -r requirements.txt
-playwright install
-```
-
-### 3. 수동 실행 (테스트용)
-
-```bash
-python main.py
-```
-
----
-
-## ☁️ Railway에서 자동 실행하기
-
-1. Railway에서 GitHub 저장소 연결
-2. `Deployments > Schedule` 에서 다음과 같이 설정:
-
-- **Command**: `python main.py`
-- **Schedule**: `30 2 * * 1-5`  
-  (한국 시간 오전 11:30, 월~금)
-
-3. `.env` 항목을 Environment 변수로 등록
-
----
-
-## 📦 결과 파일 예시
-
-Supabase에 다음 경로로 저장됨:
-
-```
-captures/lunch_250613_1130.png
-```
-
----
-
-## 👀 참고 계정
-
-[https://www.instagram.com/hoseofood](https://www.instagram.com/hoseofood)
-
----
-
-본 봇은 오직 **공개 계정의 콘텐츠**만 수집하며, 비상업적 목적으로만 사용됩니다.

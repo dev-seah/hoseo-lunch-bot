@@ -5,7 +5,6 @@ from datetime import datetime
 from supabase import create_client, Client
 from playwright.sync_api import sync_playwright
 
-# GitHub Secrets에서 불러오기
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 SUPABASE_BUCKET = os.getenv("SUPABASE_BUCKET", "captures")
